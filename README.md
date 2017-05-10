@@ -64,18 +64,18 @@ You can also use it with Negroni as follows:
 package main
 
 import (
-  "context"
   "fmt"
   "net/http"
 
   "github.com/auth0/go-jwt-middleware"
   "github.com/codegangsta/negroni"
   "github.com/dgrijalva/jwt-go"
+  "github.com/gorilla/context"
   "github.com/gorilla/mux"
 )
 
 var myHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-  user := r.Context().Value("user");
+  user := context.Get(r, "user")
   fmt.Fprintf(w, "This is an authenticated request")
   fmt.Fprintf(w, "Claim content:\n")
   for k, v := range user.(*jwt.Token).Claims {
@@ -177,6 +177,9 @@ jwtmiddleware.New(jwtmiddleware.Options{
 
 You can check out working examples in the [examples folder](https://github.com/auth0/go-jwt-middleware/tree/master/examples)
 
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
 
 ## What is Auth0?
 
